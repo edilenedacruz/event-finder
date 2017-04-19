@@ -67,11 +67,15 @@ RSpec.describe "Venues Api" do
     post "/api/v1/venues", new_venue
 
     json = JSON.parse(response.body)
-    new_venue = json
+    new_venue_json = json
 
     expect(response).to be_success
     expect(response.status).to eq(201)
     expect(Venue.all.count).to eq(2)
+    expect(new_venue_json["name"]).to eq(new_venue[:venue][:name])
+    expect(new_venue_json["url"]).to eq(new_venue[:venue][:url])
+    expect(new_venue_json["address"]).to eq(new_venue[:venue][:address])
+    expect(new_venue_json["latitude"]).to eq(new_venue[:venue][:latitude])
+    expect(new_venue_json["longitude"]).to eq(new_venue[:venue][:longitude])
   end
-
 end
