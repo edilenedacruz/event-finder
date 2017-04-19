@@ -1,5 +1,5 @@
 <h1><%= @total %> events for March</h1>
-
+<h5>Presenting the first <%= @search.count %> events </h5>
 <% @search.map do |event| %>
   <p>Event name: <%= event.name %></p>
   <p>Date and time: <%= event.date %></p>

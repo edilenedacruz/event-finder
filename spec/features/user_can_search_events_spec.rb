@@ -26,6 +26,11 @@ RSpec.feature "user can search events" do
     click_button "Find Events"
     save_and_open_page
     expect(page).to have_content("288 events for March")
+    expect(page).to have_content("Event name")
+    expect(page).to have_content("Date and time")
+    expect(page).to have_content("Event description")
+    expect(page).to have_content("Venue url")
+    expect(page).to have_content("Venue address")
   end
 end
 
