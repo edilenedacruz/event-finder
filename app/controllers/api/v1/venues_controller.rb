@@ -11,4 +11,14 @@ class Api::V1::VenuesController < ApplicationController
     Venue.delete(params[:id])
     render nothing: true, status: 204
   end
+
+  def create
+    render json: Venue.create(venue_params), status: 201
+  end
+
+  private
+
+  def venue_params
+    params.require(:venue).permit(:name, :address, :url, :latitude, :longitude)
+  end
 end

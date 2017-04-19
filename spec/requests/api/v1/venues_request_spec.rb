@@ -60,19 +60,18 @@ RSpec.describe "Venues Api" do
   it "When I send a POST request to /api/v1/venues with a name, address, url, latitude, and longitude I receive a 201 JSON response if the record is successfully created And I receive a JSON response containing the id, name, url, latitude, and longitude, but not the created_at or updated_at" do
     venue1 = Venue.create(name: "Party House", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251")
 
-    venue_params = {name: "Blakement", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251"}
+    new_venue = {venue: {name: "Blakement", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251"}}
 
     expect(Venue.all.count).to eq(1)
 
-    post "/api/v1/venues", params: { venue: venue_params}
+    post "/api/v1/venues", new_venue
 
     json = JSON.parse(response.body)
-    new_venue = json.last
+    new_venue = json
 
     expect(response).to be_success
     expect(response.status).to eq(201)
-    
-
+    expect(Venue.all.count).to eq(2)
   end
 
 end
