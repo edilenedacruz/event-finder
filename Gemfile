@@ -9,12 +9,22 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'figaro'
+gem 'faraday'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'fabrication'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
 end
-
