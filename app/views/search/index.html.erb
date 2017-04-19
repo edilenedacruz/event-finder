@@ -1,1 +1,10 @@
-<h1>Search results</h1>
+<h1><%= @total %> events for March</h1>
+
+<% @search.map do |event| %>
+  <p>Event name: <%= event.name %></p>
+  <p>Date and time: <%= event.date %></p>
+  <p>Event description: <%= event.description %></p>
+  <p>Venue url: <%= event.url %></p>
+  <p>Venue address: <%= event.address %></p>
+  <hr>
+<% end %>

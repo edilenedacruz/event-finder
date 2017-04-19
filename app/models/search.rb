@@ -1,12 +1,16 @@
 class Search
-
+  attr_reader :name, :date, :description, :address, :url
   def initialize(attributes)
-    binding.pry
+    @name = attributes["title"]
+    @date = attributes["start_time"]
+    @description = attributes["description"]
+    @address = attributes["venue_address"]
+    @url = attributes["url"]
   end
+
   def self.find_events(zip)
-    EventfulService.search_events(zip).map do |event|
+    EventfulService.search_events(zip)["event"].map do |event|
       Search.new(event)
-      binding.pry
     end
   end
 
@@ -14,10 +18,3 @@ class Search
     EventfulService.total(zip)
   end
 end
-
-
-#["title"]
-#["start_time"]
-#["description"] to 140 characters
-#["venue_address"]
-#["venue_name"]

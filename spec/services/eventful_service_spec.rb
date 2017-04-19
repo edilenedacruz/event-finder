@@ -4,7 +4,7 @@ RSpec.describe EventfulService do
   it "gives event list" do
     zip = "80202"
     service = EventfulService.search_events(zip)
-
+    binding.pry
     expect(service["total_items"].to_i).to eq(288)
   end
 end
