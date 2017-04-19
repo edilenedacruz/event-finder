@@ -10,6 +10,7 @@ RSpec.describe "Venues Api" do
 
     json = JSON.parse(response.body)
     first_venue = json.first
+
     expect(response).to be_success
     expect(response.status).to eq(200)
     expect(json.count).to eq(2)
@@ -29,9 +30,48 @@ RSpec.describe "Venues Api" do
     get "/api/v1/venues/#{venue1.id}"
 
     json = JSON.parse(response.body)
-    
+
     expect(response).to be_success
     expect(response.status).to eq(200)
+    expect(json["id"]).to eq(venue1.id)
+    expect(json["name"]).to eq(venue1.name)
+    expect(json["url"]).to eq(venue1.url)
+    expect(json["address"]).to eq(venue1.address)
+    expect(json["latitude"]).to eq(venue1.latitude)
+    expect(json["longitude"]).to eq(venue1.longitude)
+    expect(json["id"]).to_not eq(venue2.id)
+    expect(json["name"]).to_not eq(venue2.name)
+  end
+
+  it "When I send a DELETE request to /api/v1/venues/1 I receive a 204 JSON response if the record is successfully deleted" do
+
+    venue1 = Venue.create(name: "Party House", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251")
+    venue2 = Venue.create(name: "Blakement", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251")
+
+    expect(Venue.all.count).to eq(2)
+
+    delete "/api/v1/venues/#{venue1.id}"
+
+    expect(Venue.all.count).to eq(1)
+    expect(response).to be_success
+    expect(response.status).to eq(204)
+  end
+
+  it "When I send a POST request to /api/v1/venues with a name, address, url, latitude, and longitude I receive a 201 JSON response if the record is successfully created And I receive a JSON response containing the id, name, url, latitude, and longitude, but not the created_at or updated_at" do
+    venue1 = Venue.create(name: "Party House", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251")
+
+    venue_params = {name: "Blakement", address: "1510 Blake St", url: "https://www.turing.io", latitude: "39.739236", longitude: "-104.990251"}
+
+    expect(Venue.all.count).to eq(1)
+
+    post "/api/v1/venues", params: { venue: venue_params}
+
+    json = JSON.parse(response.body)
+    new_venue = json.last
+
+    expect(response).to be_success
+    expect(response.status).to eq(201)
+    
 
   end
 
