@@ -19,7 +19,13 @@ RSpec.feature "user can search events" do
   end
 
   it "sees a list of 16 events sorted by populatiry with a header `288 events for March`" do
-    
+
+    visit '/'
+
+    find(:css, "input[id$='q']").set("80202")
+    click_button "Find Events"
+
+    expect(page).to have_content("")
   end
 end
 

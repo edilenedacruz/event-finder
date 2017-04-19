@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
   def index
-    # @search = Search.
+    @search = Search.find_events(zip)
   end
 end
