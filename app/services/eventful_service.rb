@@ -4,4 +4,8 @@ class EventfulService
     parsed = JSON.parse(response.body)
   end
 
+  def self.total(zip)
+    response = Faraday.get("http://api.eventful.com/json/events/search?app_key=#{ENV['EVENTFULL_KEY']}&l=80202&t=March+2017")
+    parsed = JSON.parse(response.body)["total_items"]
+  end
 end

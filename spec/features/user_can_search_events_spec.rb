@@ -25,7 +25,7 @@ RSpec.feature "user can search events" do
     find(:css, "input[id$='q']").set("80202")
     click_button "Find Events"
 
-    expect(page).to have_content("")
+    expect(page).to have_content("288 events for March")
   end
 end
 
